@@ -2,10 +2,9 @@ package com.example.xyzbackendnew.Controller;
 import com.example.xyzbackendnew.Model.StudentModel;
 import com.example.xyzbackendnew.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class StudentController {
@@ -18,4 +17,12 @@ public class StudentController {
         dao.save(student);
         return "{status:'success'}";
     }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/view")
+    public List<StudentModel>view(){
+        return (List<StudentModel>)dao.findAll();
+
+    }
+
 }
