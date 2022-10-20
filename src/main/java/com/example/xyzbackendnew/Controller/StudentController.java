@@ -12,7 +12,7 @@ public class StudentController {
     @Autowired
     private StudentDao dao;
     @CrossOrigin(origins = "*")
-    @PostMapping(path="/studentEntry", consumes = "application/json",produces = "application/json")
+    @PostMapping(path="/add", consumes = "application/json",produces = "application/json")
     public String studentEntry(@RequestBody StudentModel student) {
         System.out.println(student.toString());
         dao.save(student);
@@ -32,6 +32,10 @@ public class StudentController {
         dao.deleteStudentById(student.getId());
         return "{status:'Success'}";
     }
-
+@CrossOrigin(origins = "*")
+    @PostMapping(path = "/searchStudent",consumes = "application/json", produces = "application/json")
+    public List<StudentModel>searchStudent(@RequestBody StudentModel student){
+        return (List<StudentModel>) dao.searchStudent(student.getName());
+}
 
 }
